@@ -4,7 +4,7 @@
 *STR03-J. Do not encode noncharacter data as a stringrange of unsigned data
 *  Compilation:  javac R04_STR03_J.java 
 *  Execution:    java R04_STR03_J
-* Attempting to convert a BigInteger value to a String and then restore it to a BigInteger value.
+* producing a String representation of the BigInteger object and then converting the String object to a byte array.
 * ******************************************************************************/
 import java.math.BigInteger;
 
@@ -12,10 +12,10 @@ public class R04_STR03_J {
 public static void main(String args[]) {
 
 BigInteger x = new BigInteger("530500452766");
-byte[] byteArray = x.toByteArray();
-String s = new String(byteArray);
-byteArray = s.getBytes();
-x = new BigInteger(byteArray);
+String s = x.toString(); //Valid character data
+byte[] byteArray = s.getBytes();
+String ns = new String(byteArray);
+x = new BigInteger(ns);
 System.out.println("x = " + x);
 }
 }
