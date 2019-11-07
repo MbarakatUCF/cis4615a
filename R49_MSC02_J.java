@@ -4,19 +4,22 @@
 *MSC02-J. Generate strong random number
 *  Compilation:  javac R49_MSC02_J.java
 *  Execution:    java R49_MSC02_J
-*  Produces an identical sequence of numbers for each given seed value Using the insecure java.util.Random
+* Uses the SecureRandom.getInstanceStrong() method, introduced in Java 8, to use a strong RNG algorithm
 * ******************************************************************************/
-import java.util.Random;
+import java.security.SecureRandom;
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 public class R49_MSC02_J {
-public static void main(String args[]) { 
-Random number = new Random(123L);
-
-for (int i = 0; i < 20; i++) {
-  // Generate another random integer in the range [0, 20]
-  int n = number.nextInt(21);
-  System.out.println(n);
-}
+public static void main (String args[]) {
+   try {
+     SecureRandom number = SecureRandom.getInstanceStrong();
+     // Generate 20 integers 0..20
+     for (int i = 0; i < 20; i++) {
+       System.out.println(number.nextInt(21));
+     }
+   } catch (NoSuchAlgorithmException nsae) {
+     // Forward to handler
+   }
 }
 }
